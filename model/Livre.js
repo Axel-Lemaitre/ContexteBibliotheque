@@ -52,3 +52,4 @@ class Livre{
         this._auteur = value;
     }
 }
+module.exports = Livre;
