@@ -1,8 +1,17 @@
 class Genre{
 
-    libelle;
 
-    public Genre(unLibelle){
-        this.libelle = unLibelle;
+    _libelle;
+
+    constructor(unLibelle){
+        this._libelle = unLibelle;
+    }
+
+    get libelle() {
+        return this._libelle;
+    }
+
+    set libelle(value) {
+        this._libelle = value;
     }
 }
