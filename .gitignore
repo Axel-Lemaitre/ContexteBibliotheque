@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+Supprimerait .gitignore
+Supprimerait .idea/
+Supprimerait model/
+Supprimerait node_modules/
+Supprimerait public/images/
+Supprimerait public/javascripts/
