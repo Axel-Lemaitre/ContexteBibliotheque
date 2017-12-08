@@ -20,3 +20,5 @@ var router = express.Router();
 
     //POST ajout d'un exemplaire de livre
         router.post('/:id/exemplaire', controllerLivre.livre_ajout_exemplaire);
+
+module.exports = router;

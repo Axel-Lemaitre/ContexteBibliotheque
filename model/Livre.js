@@ -1,23 +1,16 @@
 class Livre{
 
-    _List = require("collections/list");
 
-    _titre;
-    _resume;
-    _ISBN;
-    _auteur;
-
-
-    constructor(unTitre, unResume, unISBN, unAuteur, lesGenres){
+    constructor(unId,unTitre, unResume){//, unISBN, unAuteur, lesGenres){
         this._titre = unTitre;
         this._resume = unResume;
-        this._ISBN = unISBN;
-        this._auteur = unAuteur;
-        this._List = lesGenres;
+        this._unId = unId;
+        /*this._ISBN = unISBN;
+        this._auteur = unAuteur;*/
     }
 
-    get List() {
-        return this._List;
+    get unId() {
+        return this._unId;
     }
 
     get titre() {

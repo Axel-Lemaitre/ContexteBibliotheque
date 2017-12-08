@@ -5,7 +5,7 @@ class DAOLivre{
 
     constructor(){
         this._client = new Client({
-            connectionString : 'postgres://postgres:Password1@172.16.4.199:5432/biblio'
+            connectionString : 'postgres://bobet:bobet@192.168.222.86:5432/biblio'
         });
 
         this._client.connect(function (err){
@@ -13,7 +13,7 @@ class DAOLivre{
         });
     }
 
-    getTousLesLivres(displaycb){
+    getTousLesLivres(cb){
 
         const query = {
             name: 'fetch-all-livre',
@@ -27,12 +27,13 @@ class DAOLivre{
             } else {
                 result.rows.forEach(function(row) {
                     let unLivre;
-
-                    unLivre = new Livre(lesLivres.length, row['titre'], row['resume'],);
+                    console.log(row['titre']);
+                    unLivre = new Livre(lesLivres.length, row['titre'], row['resume']);
                     lesLivres.push(unLivre);
                 });
-
-                displaycb(lesLivres);
+                console.log(lesLivres.length);
+                console.log(lesLivres[0].titre);
+                cb(lesLivres);
             }
         });
     };
