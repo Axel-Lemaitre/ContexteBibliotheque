@@ -1,0 +1,19 @@
+extends layout
+
+block append body
+    .container.theme-showcase(role='main')
+     h1= 'Bibliothèque'
+     p Liste des exemplaires
+     table
+            tr
+                td Titre
+                td Numero
+                td Statut
+            each exemplaire in lesExemplaires
+                tr
+                    td= exemplaire.unTitre
+                    td= exemplaire.unNumero
+                    td= exemplaire.unStatut
+                    td
+                        a(href='/livre/'+exemplaire.unIdLivre+'/exemplaire/'+exemplaire.unNumero) Plus
+

@@ -13,7 +13,7 @@ var router = express.Router();
         router.get('/:id/exemplaire', controllerLivre.livre_list_exemplaire);
 
     //GET detail d'un exemplaire
-        router.get('/:id/exemplaire/:id2', controllerLivre.livre_detail_exemplaire);
+        router.get('/:id/exemplaire/:name', controllerLivre.livre_detail_exemplaire);
 
     //POST ajout d'un livre
         router.post('/', controllerLivre.livre_ajout);

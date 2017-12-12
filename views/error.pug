@@ -1,6 +1,9 @@
 extends layout
 
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+block append body
+  .container.theme-showcase(role='main')
+    // Main jumbotron for a primary marketing message or call to action
+    .jumbotron
+      h1= message
+      h2= error.status
+      pre #{error.stack}

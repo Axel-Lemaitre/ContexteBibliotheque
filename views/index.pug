@@ -1,5 +1,14 @@
 extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+block append body
+  .container.theme-showcase(role='main')
+
+    .jumbotron
+      h1  Bibliothèque
+
+    .page-header
+      if (!user)
+        h3 Bienvenue !!
+
+      else
+        h3 Bienvenue #{user.username}

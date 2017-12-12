@@ -1,10 +1,18 @@
-extends ./layout
+extends layout
 
-block content
+block append body
+    .container.theme-showcase(role='main')
     h1= 'Bibliothèque'
     p Liste des livres
-     ul
-        each livre in listeLivre
-            li= livre.titre
-            //li= livre.resume
+     table
+         tr
+            td Titre
+            td Auteur
+            td Details
+         each livre in listeLivre
+            tr
+                td= livre.titre
+                td= livre.auteur
+                td
+                    a(href='/livre/'+livre.unId) Plus
 

@@ -1,0 +1,15 @@
+extends layout
+
+block append body
+    .container.theme-showcase(role='main')
+
+    h1= 'Bibliothèque'
+    p Liste des livres
+        ul
+            li='Titre : '+Livre.titre
+            li='Resume : '+Livre.resume
+            li='Auteur : '+Livre.auteur
+            li
+                a(href='/livre/'+Livre.unId+'/exemplaire') Liste des Exemplaires
+
+

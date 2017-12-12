@@ -1,12 +1,12 @@
 class Livre{
 
 
-    constructor(unId,unTitre, unResume){//, unISBN, unAuteur, lesGenres){
+    constructor(unId,unTitre, unResume,unISBN, unAuteur){
         this._titre = unTitre;
         this._resume = unResume;
         this._unId = unId;
-        /*this._ISBN = unISBN;
-        this._auteur = unAuteur;*/
+        this._ISBN = unISBN;
+        this._auteur = unAuteur;
     }
 
     get unId() {

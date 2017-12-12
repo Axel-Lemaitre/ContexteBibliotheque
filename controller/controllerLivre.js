@@ -10,15 +10,21 @@ const DAOLivres = new DAOLivre();
     }
 
     exports.livre_detail = function (req,res,next) {
-        res.render('NOT IMPLEMENTED');
+        DAOLivres.getUnLivre(req.params.id,function(leLivre){
+            res.render('detailLivre', {Livre : leLivre});
+        });
     }
 
     exports.livre_list_exemplaire = function(req, res, next) {
-        res.render('NOT IMPLEMENTED');
+        DAOLivres.getLesExemplaire(req.params.id,function(lesExemplaires){
+            res.render('listeExemplaires', {lesExemplaires : lesExemplaires});
+        });
     }
 
     exports.livre_detail_exemplaire = function (req, res, next) {
-        res.render('NOT IMPLEMENTED');
+        DAOLivres.getUnExemplaire(req.params.id,req.params.name,function(lExemplaire){
+            res.render('detailExemplaire', {lExemplaire : lExemplaire});
+        });
     }
 
     exports.livre_ajout = function (req, res) {

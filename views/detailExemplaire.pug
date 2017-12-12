@@ -1,0 +1,13 @@
+extends layout
+
+block append body
+    .container.theme-showcase(role='main')
+
+    h1= 'Bibliothèque'
+    p detail de l'exemplaire
+        ul
+            li=lExemplaire.unTitre
+            li=lExemplaire.unNumero
+            li=lExemplaire.unStatut
+            li=lExemplaire.uneDateRetour
+

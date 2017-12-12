@@ -1,16 +1,21 @@
 class Exemplaire{
 
-    numero;
-    statut;
-    dateRetour;
 
-    constructor(unNumero, unStatut, uneDateRetour){
-        this.numero = unNumero;
-        this.statut = unStatut;
-        this.dateRetour = uneDateRetour;
+
+    constructor(unIdLivre,unNumero, unStatut, uneDateRetour, unTitre){
+        this._unIdLivre = unIdLivre;
         this._unNumero = unNumero;
         this._unStatut = unStatut;
         this._uneDateRetour = uneDateRetour;
+        this._unTitre = unTitre
+    }
+
+    get unIdLivre() {
+        return this._unIdLivre;
+    }
+
+    get unTitre() {
+        return this._unTitre;
     }
 
     get unNumero() {
@@ -37,3 +42,4 @@ class Exemplaire{
         this._uneDateRetour = value;
     }
 }
+module.exports = Exemplaire;
