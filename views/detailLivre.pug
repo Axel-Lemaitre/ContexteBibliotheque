@@ -6,10 +6,10 @@ block append body
     h1= 'Bibliothèque'
     p Liste des livres
         ul
-            li='Titre : '+Livre.titre
-            li='Resume : '+Livre.resume
-            li='Auteur : '+Livre.auteur
+            li='Titre : '+livre.titre
+            li='Resume : '+livre.resume
+            li='Auteur : '+livre.auteur
             li
-                a(href='/livre/'+Livre.unId+'/exemplaire') Liste des Exemplaires
+                a(href='/livre/'+livre.unId+'/exemplaire') Liste des Exemplaires
 
 

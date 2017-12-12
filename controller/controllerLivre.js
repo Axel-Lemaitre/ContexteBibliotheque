@@ -1,6 +1,9 @@
 const DAOLivre = require('../DAO/DAOLivre');
 const DAOLivres = new DAOLivre();
 
+const DAOAuteur = require('../DAO/DAOAuteur');
+const DAOAuteurs = new DAOAuteur();
+
 
     //Montre une liste de tous les livres
     exports.livre_list = function (req, res, next) {
@@ -11,7 +14,7 @@ const DAOLivres = new DAOLivre();
 
     exports.livre_detail = function (req,res,next) {
         DAOLivres.getUnLivre(req.params.id,function(leLivre){
-            res.render('detailLivre', {Livre : leLivre});
+            res.render('detailLivre', {livre : leLivre});
         });
     }
 
@@ -27,8 +30,22 @@ const DAOLivres = new DAOLivre();
         });
     }
 
+    exports.livre_list_aut = function (req, res) {
+        console.log('dans livre list aut');
+        DAOAuteurs.getLesAuteurs(function(lesAuteurs){
+            res.render('formAddLivre', {lesAuteurs : lesAuteurs});
+        });
+    }
+
     exports.livre_ajout = function (req, res) {
-        res.send('NOT IMPLEMENTED');
+        DAOLivres.setNewLivre((req.body.titre),(req.body.resume),(req.body.ISBN),(req.body.auteur),function(cb){
+            if(cb == true){
+                res.redirect('/');
+            }
+            else{
+                res.redirect('/livre/add');
+            }
+        });
     }
 
     exports.livre_ajout_exemplaire = function(req, res) {

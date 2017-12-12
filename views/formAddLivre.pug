@@ -1,0 +1,23 @@
+extends layout
+
+block append body
+    .container.theme-showcase(role='main')
+
+        .jumbotron
+            form.form-horizontal(action="/livre/add", method="post")
+                div
+                    label= "Titre : "
+                    input(type= "text", name="titre")
+                div
+                    label= "Resume : "
+                    input(type="text", name="resume")
+                div
+                    label= "ISBN: "
+                    input(type= "text", name="isbn")
+                div
+                    label= "Auteur : "
+                    select(name='auteur')
+                        each auteur in lesAuteurs
+                            option= auteur.nom
+                div
+                    input(type="submit", value="Submit")

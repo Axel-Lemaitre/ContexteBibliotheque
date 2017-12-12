@@ -1,16 +1,18 @@
 class Auteur{
 
-    _nom;
-    _prenom;
-    _dateDeNaissance;
-    _dateDeDeces;
 
-    constructor(unNom, unPrenom, uneDateDeNaissance, uneDateDeDeces){
+    constructor(unId, unNom, unPrenom, uneDateDeNaissance, uneDateDeDeces){
+        this._unId = unId;
         this._nom = unNom;
         this._prenom = unPrenom;
         this._dateDeNaissance = uneDateDeNaissance;
         this._dateDeDeces = uneDateDeDeces;
     }
+
+    get unId() {
+        return this._unId;
+    }
+
 
     get nom() {
         return this._nom;
@@ -43,4 +45,6 @@ class Auteur{
     set dateDeDeces(value) {
         this._dateDeDeces = value;
     }
+
 }
+module.exports = Auteur;

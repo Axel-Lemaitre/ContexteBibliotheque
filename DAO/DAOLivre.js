@@ -98,6 +98,22 @@ class DAOLivre{
             }
         });
     };
+
+    setNewLivre(titre, resume, isbn, auteur, cb){
+        let query = {
+            name: 'add-new-livre',
+            text: "INSERT INTO livre VALUES (0,'"+titre+"','"+resume+"','"+isbn+"','"+auteur.unId+"');"
+        };
+
+        this._client.query(query, function (err) {
+            if (err) {
+                console.log(err.stack);
+                cb(false);
+            } else {
+                cb(true);
+            }
+        });
+    };
 }
 
 module.exports = DAOLivre;
