@@ -16,7 +16,7 @@ class DAOAuteur{
     getLesAuteurs(cb){
 
         let query = {
-            name: 'fetch-all-auteurs',
+            name: 'fetch-un-idauteur',
             text: 'SELECT * FROM auteur; '
         };
 
@@ -32,6 +32,28 @@ class DAOAuteur{
                 });
                 cb(lesAuteurs);
             }
+        });
+    };
+
+
+    getLAuteur(nom, cb){
+
+        let query = {
+            name: 'fetch-all-auteurs',
+            text: "SELECT idauteur FROM auteur WHERE auteur.nom='"+nom+"';"
+        };
+
+        this._client.query(query, function (err, result) {
+            let unIdAuteur;
+            if (err) {
+                console.log(err.stack);
+            } else {
+                result.rows.forEach(function(row) {
+                    unIdAuteur = row['idauteur'];
+                    cb(unIdAuteur);
+                });
+            }
+            cb(null);
         });
     };
 }

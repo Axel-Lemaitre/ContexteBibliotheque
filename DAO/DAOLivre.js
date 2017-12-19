@@ -1,6 +1,8 @@
 const { Client } = require('pg');
 const Livre = require('../model/Livre');
 const Exemplaire = require('../model/Exemplaire');
+const DAOAuteur = require('../DAO/DAOAuteur');
+const DAOAuteurs = new DAOAuteur();
 
 class DAOLivre{
 
@@ -18,7 +20,7 @@ class DAOLivre{
 
         let query = {
             name: 'fetch-all-livre',
-            text: 'SELECT * FROM livre INNER JOIN auteur ON livre.lauteur = auteur.idauteur',
+            text: "SELECT * FROM livre INNER JOIN auteur ON livre.lauteur = auteur.idauteur;",
         };
 
         this._client.query(query, function (err, result) {
@@ -41,7 +43,7 @@ class DAOLivre{
         let unLivre;
         let query = {
             name: 'fetch-un-livre',
-            text: 'SELECT * FROM livre INNER JOIN auteur ON livre.lauteur = auteur.idauteur WHERE livre.idlivre = '+id,
+            text: "SELECT * FROM livre INNER JOIN auteur ON livre.lauteur = auteur.idauteur WHERE livre.idlivre = "+id+";",
         };
 
         this._client.query(query, function (err, result) {
@@ -62,7 +64,7 @@ class DAOLivre{
         let lesExemplaires = [];
         let query = {
             name: 'fetch-un-livre',
-            text: 'SELECT * FROM exemplaire INNER JOIN livre ON livre.idlivre = exemplaire.idlivre WHERE exemplaire.idlivre = '+num,
+            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.idlivre = exemplaire.idlivre WHERE exemplaire.idlivre = "+num+";",
         };
 
         this._client.query(query, function (err, result) {
@@ -83,7 +85,7 @@ class DAOLivre{
         let unExemplaire;
         let query = {
             name: 'fetch-un-livre',
-            text: 'SELECT * FROM exemplaire INNER JOIN livre ON livre.idlivre = exemplaire.idlivre WHERE exemplaire.idlivre = '+id+' AND exemplaire.numero = '+id2,
+            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.idlivre = exemplaire.idlivre WHERE exemplaire.idlivre = "+id+" AND exemplaire.numero = "+id2+";",
         };
 
         this._client.query(query, function (err, result) {
@@ -99,19 +101,17 @@ class DAOLivre{
         });
     };
 
-    setNewLivre(titre, resume, isbn, auteur, cb){
-        let query = {
-            name: 'add-new-livre',
-            text: "INSERT INTO livre VALUES (0,'"+titre+"','"+resume+"','"+isbn+"','"+auteur.unId+"');"
-        };
-
-        this._client.query(query, function (err) {
-            if (err) {
-                console.log(err.stack);
-                cb(false);
-            } else {
-                cb(true);
-            }
+    setNewLivre(titre, resume, isbn, auteur){
+        DAOAuteurs.getLAuteur(auteur, function(lID){
+            const query = {
+                name: 'add-new-livre',
+                text: "creeLivre('"+titre+"','"+resume+"','"+isbn+"','"+lID+"');"
+            };
+            this._client.query(query, function (err) {
+                if (err) {
+                    console.log(err.stack);
+                }
+            });
         });
     };
 }

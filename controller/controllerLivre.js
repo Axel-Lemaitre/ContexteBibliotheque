@@ -5,6 +5,17 @@ const DAOAuteur = require('../DAO/DAOAuteur');
 const DAOAuteurs = new DAOAuteur();
 
 
+exports.livre_ajout = function (req, res) {
+    DAOLivres.setNewLivre((req.body.titre),(req.body.resume),(req.body.isbn),(req.body.auteur),function(cb){
+        if(cb == true){
+            res.redirect('/');
+        }
+        else{
+            res.redirect('/livre/add');
+        }
+    });
+}
+
     //Montre une liste de tous les livres
     exports.livre_list = function (req, res, next) {
         DAOLivres.getTousLesLivres(function(lesLivres){
@@ -37,16 +48,6 @@ const DAOAuteurs = new DAOAuteur();
         });
     }
 
-    exports.livre_ajout = function (req, res) {
-        DAOLivres.setNewLivre((req.body.titre),(req.body.resume),(req.body.ISBN),(req.body.auteur),function(cb){
-            if(cb == true){
-                res.redirect('/');
-            }
-            else{
-                res.redirect('/livre/add');
-            }
-        });
-    }
 
     exports.livre_ajout_exemplaire = function(req, res) {
         res.send('NOT IMPLEMENTED');
