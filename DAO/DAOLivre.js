@@ -102,16 +102,15 @@ class DAOLivre{
     };
 
     setNewLivre(titre, resume, isbn, auteur){
-        DAOAuteurs.getLAuteur(auteur, function(lID){
-            const query = {
-                name: 'add-new-livre',
-                text: "creeLivre('"+titre+"','"+resume+"','"+isbn+"','"+lID+"');"
-            };
-            this._client.query(query, function (err) {
-                if (err) {
-                    console.log(err.stack);
-                }
-            });
+        const query = {
+            name: 'add-new-livre',
+            text: "select creelivre('"+titre+"','"+resume+"','"+isbn+"',"+auteur+");"
+        };
+
+        this._client.query(query, function (err) {
+            if (err) {
+                console.log(err.stack);
+            }
         });
     };
 }

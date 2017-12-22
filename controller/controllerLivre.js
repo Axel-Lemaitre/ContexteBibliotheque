@@ -6,14 +6,10 @@ const DAOAuteurs = new DAOAuteur();
 
 
 exports.livre_ajout = function (req, res) {
-    DAOLivres.setNewLivre((req.body.titre),(req.body.resume),(req.body.isbn),(req.body.auteur),function(cb){
-        if(cb == true){
-            res.redirect('/');
-        }
-        else{
-            res.redirect('/livre/add');
-        }
+    DAOAuteurs.getLAuteur(req.body.auteur,function(lAuteur){
+        DAOLivres.setNewLivre((req.body.titre),(req.body.resume),(req.body.isbn),lAuteur);
     });
+    res.redirect('/');
 }
 
     //Montre une liste de tous les livres

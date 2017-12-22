@@ -47,13 +47,13 @@ class DAOAuteur{
             let unIdAuteur;
             if (err) {
                 console.log(err.stack);
+                cb(null);
             } else {
                 result.rows.forEach(function(row) {
                     unIdAuteur = row['idauteur'];
                     cb(unIdAuteur);
                 });
             }
-            cb(null);
         });
     };
 }
