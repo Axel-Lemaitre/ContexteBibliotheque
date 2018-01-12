@@ -30,7 +30,7 @@ class DAOLivre{
             } else {
                 result.rows.forEach(function(row) {
                     let unLivre;
-                    unLivre = new Livre(row['idlivre'], row['titre'], row['resume'], row['isbn'], row['nom']);
+                    unLivre = new Livre(row['iddocument'], row['titre'], row['resume'], row['isbn'], row['nom']);
                     lesLivres.push(unLivre);
                 });
                 cb(lesLivres);
@@ -43,7 +43,7 @@ class DAOLivre{
         let unLivre;
         let query = {
             name: 'fetch-un-livre',
-            text: "SELECT * FROM livre INNER JOIN auteur ON livre.lauteur = auteur.idauteur WHERE livre.idlivre = "+id+";",
+            text: "SELECT * FROM livre INNER JOIN auteur ON livre.lauteur = auteur.idauteur WHERE livre.iddocument = "+id+";",
         };
 
         this._client.query(query, function (err, result) {
@@ -52,7 +52,7 @@ class DAOLivre{
             } else {
                 result.rows.forEach(function(row) {
                     console.log(row['titre']);
-                    unLivre = new Livre(row['idlivre'], row['titre'], row['resume'], row['isbn'], row['nom']);
+                    unLivre = new Livre(row['iddocument'], row['titre'], row['resume'], row['isbn'], row['nom']);
                 });
                 cb(unLivre);
             }
@@ -64,7 +64,7 @@ class DAOLivre{
         let lesExemplaires = [];
         let query = {
             name: 'fetch-un-livre',
-            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.idlivre = exemplaire.idlivre WHERE exemplaire.idlivre = "+num+";",
+            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.iddocument = exemplaire.idlivre WHERE exemplaire.idlivre = "+num+";",
         };
 
         this._client.query(query, function (err, result) {
@@ -85,7 +85,7 @@ class DAOLivre{
         let unExemplaire;
         let query = {
             name: 'fetch-un-livre',
-            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.idlivre = exemplaire.idlivre WHERE exemplaire.idlivre = "+id+" AND exemplaire.numero = "+id2+";",
+            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.iddocument = exemplaire.idlivre WHERE exemplaire.idlivre = "+id+" AND exemplaire.numero = "+id2+";",
         };
 
         this._client.query(query, function (err, result) {
