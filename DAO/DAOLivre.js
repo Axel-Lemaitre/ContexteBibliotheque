@@ -40,20 +40,21 @@ class DAOLivre{
 
 
     getUnLivre(id,cb){
-        let unLivre;
         let query = {
             name: 'fetch-un-livre',
-            text: "SELECT * FROM livre INNER JOIN auteur ON livre.lauteur = auteur.idauteur WHERE livre.iddocument = "+id+";",
+            text: "SELECT * FROM livre INNER JOIN auteur ON livre.lauteur = auteur.idauteur WHERE livre.iddocument = $1;",
+            values: [id]
         };
+
+        console.log(query.text);
 
         this._client.query(query, function (err, result) {
             if (err) {
                 console.log(err.stack);
             } else {
-                result.rows.forEach(function(row) {
-                    console.log(row['titre']);
-                    unLivre = new Livre(row['iddocument'], row['titre'], row['resume'], row['isbn'], row['nom']);
-                });
+                let unLivre;
+                console.log(result.rows[0]['titre']);
+                unLivre = new Livre(result.rows[0]['iddocument'], result.rows[0]['titre'], result.rows[0]['resume'], result.rows[0]['isbn'], result.rows[0]['nom']);
                 cb(unLivre);
             }
         });
@@ -64,7 +65,8 @@ class DAOLivre{
         let lesExemplaires = [];
         let query = {
             name: 'fetch-un-livre',
-            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.iddocument = exemplaire.idlivre WHERE exemplaire.idlivre = "+num+";",
+            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.iddocument = exemplaire.idlivre WHERE exemplaire.idlivre = $1;",
+            values: [num]
         };
 
         this._client.query(query, function (err, result) {
@@ -85,7 +87,8 @@ class DAOLivre{
         let unExemplaire;
         let query = {
             name: 'fetch-un-livre',
-            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.iddocument = exemplaire.idlivre WHERE exemplaire.idlivre = "+id+" AND exemplaire.numero = "+id2+";",
+            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.iddocument = exemplaire.idlivre WHERE exemplaire.idlivre = $1 AND exemplaire.numero = $2;",
+            values: [id,id2]
         };
 
         this._client.query(query, function (err, result) {
@@ -104,7 +107,8 @@ class DAOLivre{
     setNewLivre(titre, resume, isbn, auteur){
         const query = {
             name: 'add-new-livre',
-            text: "select creelivre('"+titre+"','"+resume+"','"+isbn+"',"+auteur+");"
+            text: "select creelivre('$1','$2','$3',$4);",
+            values: [titre, resume, isbn, auteur]
         };
 
         this._client.query(query, function (err) {
