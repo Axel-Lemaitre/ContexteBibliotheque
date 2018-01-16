@@ -1,0 +1,12 @@
+extends layout
+
+block append body
+    .container.theme-showcase(role='main')
+
+        .jumbotron
+            form.form-horizontal(action="/genre/add", method="post")
+                div
+                    label= "libelle du genre : "
+                    input(type= "text", name="genre")
+                div
+                    input(type="submit", value="Submit")

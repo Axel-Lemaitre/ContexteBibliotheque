@@ -17,7 +17,7 @@ class DAOUsers{
     getUserByUsername(username, cb){
         const query = {
             name: 'get user by username',
-            text: 'SELECT idlecteur, username, password FROM lecteur WHERE username = $1 ',
+            text: 'SELECT idlecteur, username, password, libelle FROM lecteur INNER JOIN rolebiblio on idrole = roleb WHERE username = $1 ',
             values: [username]
         };
 
@@ -28,7 +28,7 @@ class DAOUsers{
                 console.log(err.stack);
             } else {
                 var unUser;
-                unUser = new User(result.rows[0]['idlecteur'], result.rows[0]['username'], result.rows[0]['password']);
+                unUser = new User(result.rows[0]['idlecteur'], result.rows[0]['username'], result.rows[0]['password'], result.rows[0]['libelle']);
                 cb(null, unUser);
             }
         });
@@ -37,7 +37,7 @@ class DAOUsers{
     getUserById(id, cb){
         const query = {
             name: 'get user by id',
-            text: "SELECT idlecteur, username, password FROM lecteur WHERE idlecteur = $1;",
+            text: "SELECT idlecteur, username, password, libelle FROM lecteur INNER JOIN rolebiblio on idrole = roleb WHERE idlecteur = $1;",
             values: [id]
         };
 
@@ -46,7 +46,7 @@ class DAOUsers{
                 console.log(err.stack);
             } else{
                 let unUser;
-                unUser = new User(result.rows[0]['idlecteur'], result.rows[0]['username'], result.rows[0]['password']);
+                unUser = new User(result.rows[0]['idlecteur'], result.rows[0]['username'], result.rows[0]['password'], result.rows[0]['libelle']);
                 cb(null, unUser);
             }
         });

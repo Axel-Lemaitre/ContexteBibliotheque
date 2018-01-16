@@ -11,6 +11,7 @@ let session = require('express-session');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var livre = require('./routes/livre');
+var genre = require('./routes/genre');
 var android = require('./routes/android');
 
 let DAOUsers = require('./DAO/DAOUsers');
@@ -75,6 +76,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/livre', livre);
 app.use('/android', android);
+app.use('/genre', genre);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
