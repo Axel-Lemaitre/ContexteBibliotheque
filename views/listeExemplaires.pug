@@ -14,6 +14,10 @@ block append body
                     td= exemplaire.unTitre
                     td= exemplaire.unNumero
                     td= exemplaire.unStatut
-                    td
-                        a(href='/livre/'+exemplaire.unIdLivre+'/exemplaire/'+exemplaire.unNumero) Plus
+                    if(exemplaire.uneDateRetour)
+                        td
+                            a(href='/livre/'+exemplaire.unIdLivre+'/exemplaire/'+exemplaire.unNumero) Plus
+                    else
+                        td
+                            a(href='/livre/'+exemplaire.unIdLivre+'/exemplaire/'+exemplaire.unNumero+'/retrait') Retirer
 

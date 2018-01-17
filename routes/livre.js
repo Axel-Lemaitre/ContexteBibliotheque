@@ -26,5 +26,6 @@ router.get('/:id/exemplaire/:name', controllerLivre.livre_detail_exemplaire);
     //POST ajout d'un exemplaire de livre
 router.post('/:id/exemplaire', controllerLivre.livre_ajout_exemplaire);
 
+router.get('/:id/exemplaire/:name/retrait', controllerLivre.livre_retrait_exemplaire);
 
 module.exports = router;

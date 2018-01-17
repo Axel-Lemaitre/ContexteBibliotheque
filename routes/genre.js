@@ -8,4 +8,4 @@ router.get('/add',controllerGenre.form_add_genre);
 //GET formulaire ajout genre
 router.post('/add', controllerGenre.ajout_genre);
 
-module.exports = router();
+module.exports = router;

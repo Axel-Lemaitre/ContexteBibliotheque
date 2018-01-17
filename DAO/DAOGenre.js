@@ -15,7 +15,7 @@ class DAOGenre{
     addNewGenre(libelle){
         const query = {
             name: 'ajouter un nouveau genre',
-            text: 'creegenre($1);',
+            text: 'select creegenre($1);',
             values: [libelle]
         };
 

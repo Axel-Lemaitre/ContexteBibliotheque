@@ -15,13 +15,13 @@ exports.livre_ajout = function (req, res) {
     //Montre une liste de tous les livres
     exports.livre_list = function (req, res, next) {
         DAOLivres.getTousLesLivres(function(lesLivres){
-            res.render('listeLivres', {listeLivre : lesLivres});
+            res.render('listeLivres', {listeLivre : lesLivres, user: req.user});
         });
     }
 
     exports.livre_detail = function (req,res,next) {
         DAOLivres.getUnLivre(req.params.id,function(leLivre){
-            res.render('detailLivre', {livre : leLivre});
+            res.render('detailLivre', {livre : leLivre, user: req.user});
         });
     }
 
@@ -33,18 +33,26 @@ exports.livre_ajout = function (req, res) {
 
     exports.livre_detail_exemplaire = function (req, res, next) {
         DAOLivres.getUnExemplaire(req.params.id,req.params.name,function(lExemplaire){
-            res.render('detailExemplaire', {lExemplaire : lExemplaire});
+            res.render('detailExemplaire', {lExemplaire : lExemplaire, user: req.user});
         });
     }
 
     exports.livre_list_aut = function (req, res) {
         console.log('dans livre list aut');
         DAOAuteurs.getLesAuteurs(function(lesAuteurs){
-            res.render('formAddLivre', {lesAuteurs : lesAuteurs});
+            res.render('formAddLivre', {lesAuteurs : lesAuteurs, user: req.user});
         });
     }
 
 
     exports.livre_ajout_exemplaire = function(req, res) {
-        res.send('NOT IMPLEMENTED');
+        for (var i = 0; i < req.body.nombre; i++) {
+            DAOLivres.setNewExemplaire(req.params.id);
+        }
+        res.redirect('/');
+    }
+
+    exports.livre_retrait_exemplaire = function(req, res) {
+        DAOLivres.dropExemplaire(req.params.id, req.params.name);
+        res.redirect('/');
     }
