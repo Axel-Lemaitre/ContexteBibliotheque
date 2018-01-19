@@ -10,7 +10,7 @@ class DAOUsers{
         });
 
         this._client.connect(function (err) {
-            if (err) return done(err);
+            if (err) return (err.message);
         });
     }
 
@@ -27,8 +27,10 @@ class DAOUsers{
             if (err) {
                 console.log(err.stack);
             } else {
-                var unUser;
-                unUser = new User(result.rows[0]['idlecteur'], result.rows[0]['username'], result.rows[0]['password'], result.rows[0]['libelle']);
+                var unUser = null;
+                result.rows.forEach(function (row) {
+                    unUser = new User(row['idlecteur'], row['username'], row['password'], row['libelle']);
+                });
                 cb(null, unUser);
             }
         });

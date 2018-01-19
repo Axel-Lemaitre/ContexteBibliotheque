@@ -8,7 +8,7 @@ class DAOGenre{
         });
 
         this._client.connect(function (err) {
-            if (err) return done(err);
+            if (err) return (err.message);
         });
     }
 

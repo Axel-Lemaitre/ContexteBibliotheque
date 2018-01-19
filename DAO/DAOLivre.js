@@ -62,14 +62,14 @@ class DAOLivre {
 
 
     getLesExemplaire(num, cb) {
-        let lesExemplaires = [];
         let query = {
             name: 'fetch-un-livre',
-            text: "SELECT * FROM exemplaire INNER JOIN livre ON livre.iddocument = exemplaire.iddocument WHERE exemplaire.iddocument = $1;",
+            text: "SELECT exemplaire.iddocument, numero, statut, dateretour, titre FROM exemplaire INNER JOIN livre ON livre.iddocument = exemplaire.iddocument WHERE exemplaire.iddocument = $1;",
             values: [num]
         };
 
         this._client.query(query, function (err, result) {
+            let lesExemplaires = [];
             if (err) {
                 console.log(err.stack);
             } else {
@@ -107,7 +107,7 @@ class DAOLivre {
     setNewLivre(titre, resume, isbn, auteur) {
         const query = {
             name: 'add-new-livre',
-            text: "select creelivre('$1','$2','$3',$4);",
+            text: "select creelivre($1,$2,$3,$4);",
             values: [titre, resume, isbn, auteur]
         };
 
